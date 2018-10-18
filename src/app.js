@@ -1,13 +1,12 @@
 const ListView = require('./views/list_view.js');
-const Munros = require('./models/munros.js');
+const Regions = require('./models/regions.js');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const munrosListContainer = document.querySelector('#munros');
-
-  const listView = new ListView(munrosListContainer);
+  const regionsListContainer = document.querySelector('#regions');
+  const listView = new ListView(regionsListContainer);
   listView.bindEvents();
 
-  const munros = new Munros();
-  munros.getData();
+  const regions = new Regions();
+  regions.getData();
 });

@@ -1,25 +1,45 @@
-const DetailView = function(container, munro){
-  this.munrosContainer = container;
-  this.munro = munro;
+const DetailView = function(container, region){
+  this.regionsContainer = container;
+  this.region = region;
 };
 
 DetailView.prototype.render = function(){
-  const munroContainer = document.createElement('div');
-  munroContainer.classList.add('munro');
+  const regionContainer = document.createElement('div');
+  regionContainer.classList.add('regions');
 
-  const name = this.createMunroHeading();
-  munroContainer.appendChild(name);
+  const name = this.createRegionHeading();
+  regionContainer.appendChild(name);
+
+  const munrosList = this.createMunrosList();
+  regionContainer.appendChild(munrosList)
+
+  this.regionsContainer.appendChild(regionContainer);
 }
 
-DetailView.prototype.createMunroHeading = function(){
+DetailView.prototype.createRegionHeading = function(){
   const name = document.createElement('h2');
-  name.classList.add('munro-name');
-  if(!this.munro.name){
+  name.classList.add('region-name');
+  if(!this.region.name){
     name.textContent = "Misc";
   } else {
-    name.textContent = this.munro.name;
+    name.textContent = this.region.name;
   }
   return name;
+};
+
+DetailView.prototype.createMunrosList = function(){
+  const munrosList = document.createElement('ul');
+  munrosList.classList.add('munros');
+  this.populateList(munrosList);
+  return munrosList;
+};
+
+DetailView.prototype.populateList = function(list){
+  this.region.munros.forEach((munro)=>{
+    const munroListItem = document.createElement('li');
+    munroListItem.textContent = munro.name;
+    list.appendChild(munroListItem);
+  });
 };
 
 // DetailView.prototype.populateList = function(list) {

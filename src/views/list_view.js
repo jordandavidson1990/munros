@@ -7,16 +7,17 @@ const ListView = function(container)
 }
 
 ListView.prototype.bindEvents = function(){
-  PubSub.subscribe('Munros:munros-data-ready', (evt) => {
-    console.log('evt:', evt);
-    this.munros = evt.detail;
+  PubSub.subscribe('Regions:regions-data-ready', (evt) => {
+    console.log('evt:', evt.detail);
+    this.regions = evt.detail;
     this.render();
   });
 };
 
 ListView.prototype.render = function(){
-  this.munros.forEach((munro) =>{
-    const detailView = new DetailView(this.container, munro);
+  this.regions.forEach((region) =>{
+    const detailView = new DetailView(this.container, region);
+    console.log('region:',  region);
     detailView.render();
   });
 };
